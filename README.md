@@ -1,0 +1,1 @@
+Akka makes it easier to write accurate concurrent, parallel, and distributed systems
