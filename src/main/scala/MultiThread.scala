@@ -17,7 +17,7 @@ class MyActor extends Actor {
   }
 }
 
-object MyApp extends App {
+object MultiThread extends App {
   implicit val timeout = Timeout(5.seconds)
 val config = ConfigFactory.parseString( """
     fixed-thread-pool {
@@ -32,8 +32,10 @@ val config = ConfigFactory.parseString( """
   (1 to 10).map(i => (act ! i)) //tell
   val futures = (1 to 10).map(i => (act ? s"Message $i").mapTo[String]) //ask = receive
   wait(futures)
-  noWait(futures)
+//  noWait(futures)
   system.terminate()
+
+
 
   def wait(futures:Seq[Future[String]])={
     val futureSeq = Future.sequence(futures)
